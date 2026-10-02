@@ -1,0 +1,12 @@
+.git/
+.env*
+.local/
+.openai/
+.vercel/
+sites/
+linkone-mobile-entry-update*.tar.gz
+node_modules/
+.next/
+out/
+*.tsbuildinfo
+npm-debug.log*

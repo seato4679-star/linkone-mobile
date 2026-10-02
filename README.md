@@ -78,6 +78,8 @@ node -e "console.log(require('node:crypto').randomBytes(32).toString('hex'))"
 
 ## Supabase / PostgreSQLの構築
 
+画面操作から接続・保存確認までの手順は [docs/BACKEND_SETUP.md](docs/BACKEND_SETUP.md) を参照してください。設定後に `npm run db:check` で、データを書き換えずに接続と必要な列を確認できます。Sitesの静的公開版と、DBへ保存するNext.js版は別のため、保存機能を公開する場合はNext.js版のサーバー公開も必要です。
+
 1. 自分のSupabaseアカウントでプロジェクトを作成します。
 2. SQL Editorで [supabase/schema.sql](supabase/schema.sql) を新しいDBに一度実行します。
 3. プロジェクト設定からURLとサーバー用の`service_role`キーを確認します。JWT形式のlegacyキーは`apikey`と`Authorization`の両方、新形式の`sb_secret_...`キーは`apikey`だけでSupabase REST APIへ送ります。publishable / anonキーではありません。
@@ -85,6 +87,8 @@ node -e "console.log(require('node:crypto').randomBytes(32).toString('hex'))"
 5. 開発サーバーを再起動し、架空の情報で1件申し込みます。
 6. Supabase Table Editorと `/admin`で同じ申込が見えることを確認します。
 7. 管理画面からステータスを変更し、Table Editorでも反映を確認します。
+
+DBモードのローカルサーバーに対して `npm run test:database` を実行すると、架空の申込作成、Supabaseへの保存、管理者認証、一覧・詳細、ステータス更新を確認できます。実行ごとにテスト申込が1件残ります。`TEST_BASE_URL` でlocalhostのポートを指定できます。`npm run test:smoke` は従来どおりローカルデモ専用です。
 
 `applications`にはUUID主キー、連絡先、プラン・オプション、同意、ステータス、作成日時を保存します。行レベルセキュリティ（RLS）を有効化し、`anon` / `authenticated`のアクセス権を取り消しています。ブラウザ向けの許可ポリシーは作りません。APIサーバーだけがservice_roleで操作します。
 
@@ -184,9 +188,7 @@ feat: add application API and staff management
 docs: add architecture and learning guides
 ```
 
-外部リポジトリへのpushや本番公開はまだ行っていません。
-
-この作業環境ではGitの著者情報とremoteが未設定のため、コミットも未作成です。ご自身の名前・メールを`git config user.name`と`git config user.email`で設定してからコミットしてください。架空の著者情報は設定していません。
+ソースはGitHubの `seato4679-star/linkone-mobile` で管理します。Sites用の静的プレビューは `sites/` に分かれており、このリポジトリとVercelへのアップロード対象から除外しています。Vercelで公開するのは、このルートにあるNext.js版です。秘密情報はGitへ含めず、公開先の環境変数へ設定します。
 
 ## 参考資料
 
