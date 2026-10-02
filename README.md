@@ -63,7 +63,7 @@ npm run dev
 | `DEMO_MODE`                 | ローカルファイル保存の明示的な有効化 | ローカルのみ `true`、Vercelは`false`       |
 | `SUPABASE_URL`              | SupabaseプロジェクトのURL            | DBモードで必須                             |
 | `SUPABASE_SERVICE_ROLE_KEY` | サーバー専用のservice_roleキー       | DBモードで必須                             |
-| `ADMIN_PASSWORD`            | 社員画面の共有パスワード             | 12文字以上。公開時は十分に長いランダムな値 |
+| `ADMIN_PASSWORD`            | 社員画面の共有パスワード             | 4文字以上。短い値はデモ用。実運用では十分に長いランダムな値 |
 | `SESSION_SECRET`            | ログインCookieの署名鍵               | 32文字以上。公開時に必ず新規生成           |
 
 環境変数には`NEXT_PUBLIC_`を付けません。`.env*`、`.local/`はGit対象外です。サンプルの`.env.example`だけをコミット対象にしています。

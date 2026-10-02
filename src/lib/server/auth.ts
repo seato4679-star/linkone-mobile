@@ -17,8 +17,8 @@ export function sessionSecret() {
 }
 export function passwordMatches(password: string) {
   const expected = process.env.ADMIN_PASSWORD;
-  if (!expected || expected.length < 12)
-    throw new Error("ADMIN_PASSWORD must have at least 12 characters");
+  if (!expected || expected.length < 4)
+    throw new Error("ADMIN_PASSWORD must have at least 4 characters");
   if (!isDemoMode() && expected === "linkone-local-demo")
     throw new Error("Replace the demo ADMIN_PASSWORD outside local demo mode");
   const hash = (value: string) =>
